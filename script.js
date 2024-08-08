@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         showTestimonial(currentTestimonial);
-        setInterval(nextTestimonial, 5000); // Change testimonial every 5 seconds
+        setInterval(nextTestimonial, 3000); // Change testimonial every 3 seconds
     }
 
     // Slider for main images
@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (dots[slideIndex - 1]) {
                 dots[slideIndex - 1].className += " active";
             }
-            setTimeout(showSlides, 5000); // Change image every 5 seconds
+            setTimeout(showSlides, 3000); // Change image every 3 seconds
         }
     }
 
