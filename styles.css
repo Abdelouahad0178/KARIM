@@ -21,25 +21,12 @@ body {
     transition: margin-left 0.3s ease-in-out;
 }
 
-body.nav-active {
-    margin-left: 250px; /* Adjust as necessary */
-}
-
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
 }
-ul{
 
-    list-style-type: none;
-    padding-left  :5px ;
-
-
-
-}
-
-/* Top Bar */
 .top-bar {
     background-color: var(--secondary-color);
     color: var(--light-text-color);
@@ -70,12 +57,11 @@ ul{
     margin-right: 5px;
 }
 
-/* Navbar */
 .navbar {
     background-color: var(--primary-color);
     padding: 15px 0;
     position: relative;
-    z-index: 1000; /* Ensure navbar is above other content */
+    z-index: 1000;
 }
 
 .navbar .container {
@@ -85,7 +71,7 @@ ul{
 }
 
 .logo img {
-    height: 50px;
+    height: 150px;
     position: relative;
     right: 20px;
 }
@@ -111,124 +97,95 @@ ul{
     color: var(--accent-color);
 }
 
-/* Dropdown Menu */
 .dropdown-menu {
     display: none;
     position: absolute;
     background-color: var(--primary-color);
     min-width: 200px;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
-    
+    flex-direction: column;
 }
 
-.dropdown:hover .dropdown-menu,
-.dropdown.active .dropdown-menu {
+.nav-links li:hover .dropdown-menu {
     display: block;
 }
 
-/* Search and Cart */
-.search-and-cart {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.search-and-cart input {
-    padding: 8px;
-    border: none;
-    border-radius: 4px;
-}
-
-.search-btn, .cart-btn {
-    background-color: var(--accent-color);
-    color: var(--light-text-color);
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.search-btn:hover, .cart-btn:hover {
-    background-color: #ff8c5a;
-}
-
-/* Toggle Menu */
 .toggle-menu {
     display: none;
     cursor: pointer;
-    color: white;
+    color:white;
 }
 
-@media (max-width: 1440px) {
-    .container {
-        width: 95%;
-       
-    }
-   
-
-@media (max-width: 1024px) {
-    .container {
-        width: 100%;
-        padding: 0 20px;
+/* Menu hamburger (petites dimensions) */
+@media (max-width: 620px) {
+    .toggle-menu {
+        display: block;
+        position: absolute;
+        top: 15px;
+        left: 20px;
+        z-index: 900;  /* Assurez-vous que le bouton est aussi devant les autres éléments */
     }
 
-    .logo img {
-        height: 40px;
-    }
-}
-
-@media (max-width: 992px) {
     .nav-links {
         display: none;
         flex-direction: column;
-        width: 250px;
+        width: 50%;  /* Le menu occupe 50% de la largeur de l'écran */
+        height: 100%; /* Le menu occupe toute la hauteur */
         background-color: var(--primary-color);
-        position: fixed;
+        position: fixed;  /* Le menu reste en place même en défilant */
         top: 0;
         left: 0;
-        height: 100vh;
-        z-index: 9999; /* Ensure nav-links are above other content */
+        z-index: 1999;  /* Menu flottant au-dessus de tout */
         overflow-y: auto;
         transition: transform 0.3s ease-in-out;
-        transform: translateX(-100%);
+        transform: translateX(-100%); /* Masquer le menu à gauche */
     }
 
     .nav-links.active {
         display: flex;
-        transform: translateX(0);
+        transform: translateX(0); /* Afficher le menu en faisant glisser */
     }
 
     .nav-links li {
         width: 100%;
         text-align: center;
-        
     }
 
     .nav-links a {
         padding: 15px;
         display: block;
-        color: black;
+        color: var(--light-text-color);
         font-size: large;
-        
     }
 
     .dropdown-menu {
-        position: static;
         display: none;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+        box-shadow: none;
     }
 
-    .dropdown.active .dropdown-menu {
-        display: block;
-        color: blue;
+    .nav-links.active .dropdown-menu {
+        display: flex;
     }
 
-    .toggle-menu {
-        display: block;
-        position: absolute;
-        top: 15px;
-        right: 20px;
+    .dropdown-menu li {
+        width: 100%;
+        text-align: left;
+        padding: 10px;
+    }
+
+    .dropdown-menu a {
+        padding: 10px;
+        color: var(--light-text-color);
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .dropdown-menu a:hover {
+        background-color: var(--accent-color);
     }
 }
 
@@ -241,14 +198,6 @@ ul{
         width: 100%;
         justify-content: space-between;
         margin-top: 15px;
-    }
-
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .product-grid {
-        grid-template-columns: 1fr;
     }
 }
 
@@ -292,6 +241,7 @@ ul{
 
 .slide {
     display: none;
+    text-align: center;
 }
 
 .slide img {
@@ -299,7 +249,6 @@ ul{
     height: auto;
 }
 
-/* Next and previous buttons */
 .prev, .next {
     cursor: pointer;
     position: absolute;
@@ -324,52 +273,15 @@ ul{
     background-color: rgba(0,0,0,0.8);
 }
 
-/* Dots */
-.dot, .product-dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: inline-block;
-    transition: background-color 0.6s ease;
-}
-
-.active, .dot:hover, .product-dot:hover {
-    background-color: #edecef;
-}
-
-/* Fade animation */
-.fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-}
-
-@keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
-}
-
-/* Text Section */
 .text-section {
     padding: 20px;
     margin-top: 20px;
 }
 
-/* Title Section */
 .title-section {
     margin: 50px 0;
 }
 
-/* Product Slider */
 .product-slider {
     padding: 20px;
 }
@@ -393,7 +305,6 @@ ul{
     padding: 20px;
 }
 
-/* Footer */
 footer {
     background-color: var(--primary-color);
     color: var(--light-text-color);

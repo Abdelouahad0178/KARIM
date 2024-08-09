@@ -2,72 +2,45 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggleMenu = document.querySelector('.toggle-menu');
     const navLinks = document.querySelector('.nav-links');
     const dropdowns = document.querySelectorAll('.dropdown');
-    const navLinksItems = document.querySelectorAll('.nav-links a');
 
-    // Toggle menu visibility on small screens
     if (toggleMenu && navLinks) {
         toggleMenu.addEventListener('click', function() {
             navLinks.classList.toggle('active');
             document.body.classList.toggle('nav-active');
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
         });
+    }
 
-        // Close the menu when clicking on a link
-        navLinksItems.forEach(item => {
-            item.addEventListener('click', function(e) {
-                const parentDropdown = e.target.closest('.dropdown');
-                const isDropdownToggle = e.target.parentElement.classList.contains('dropdown');
-                
-                // If clicking on a dropdown toggle, show/hide the submenu without redirecting
-                if (parentDropdown && isDropdownToggle) {
-                    e.preventDefault();
-                    const dropdownMenu = e.target.nextElementSibling;
-                    if (dropdownMenu) {
-                        dropdownMenu.classList.toggle('active');
-                    }
-                } else {
-                    // Close the menu when clicking on a normal link
-                    navLinks.classList.remove('active');
-                    document.body.classList.remove('nav-active');
+    dropdowns.forEach(dropdown => {
+        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        const dropdownLink = dropdown.querySelector('a');
+
+        dropdownLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                if (menu !== dropdownMenu) {
+                    menu.style.display = 'none';
                 }
             });
-        });
 
-        // Close the menu when clicking outside of it
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.navbar') && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                document.body.classList.remove('nav-active');
-            }
+            dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
         });
-    }
+    });
 
-    // Toggle dropdown menus
-    if (dropdowns) {
-        dropdowns.forEach(dropdown => {
-            const dropdownToggle = dropdown.querySelector('a');
-            if (dropdownToggle) {
-                dropdownToggle.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    dropdown.classList.toggle('active');
-                });
-            }
-        });
-    }
-
-    // Close dropdowns when clicking outside
     document.addEventListener('click', function(e) {
-        if (!e.target.closest('.dropdown') && !e.target.closest('.toggle-menu')) {
-            dropdowns.forEach(dropdown => {
-                dropdown.classList.remove('active');
+        if (!e.target.closest('.dropdown') && !e.target.closest('.toggle-menu') && window.innerWidth <= 620) {
+            navLinks.classList.remove('active');
+            document.body.classList.remove('nav-active');
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
             });
-            if (navLinks) {
-                navLinks.classList.remove('active');
-                document.body.classList.remove('nav-active');
-            }
         }
     });
 
-    // Slider for testimonials
     const testimonials = document.querySelectorAll('.testimonial');
     if (testimonials.length > 0) {
         let currentTestimonial = 0;
@@ -83,77 +56,35 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         showTestimonial(currentTestimonial);
-        setInterval(nextTestimonial, 5000); // Change testimonial every 5 seconds
+        setInterval(nextTestimonial, 5000);
     }
 
-    // Slider for main images
-    let slideIndex = 0;
-    let productSlideIndex = 0;
+    let slideIndexes = [1, 1, 1];
+    const sliders = ["slider1", "slider2", "slider3"];
 
-    function showSlides() {
-        let slides = document.getElementsByClassName("slide");
-        let dots = document.getElementsByClassName("dot");
-        if (slides.length > 0) {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            slideIndex++;
-            if (slideIndex > slides.length) { slideIndex = 1 }
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[slideIndex - 1].style.display = "block";
-            if (dots[slideIndex - 1]) {
-                dots[slideIndex - 1].className += " active";
-            }
-            setTimeout(showSlides, 5000); // Change image every 5 seconds
-        }
+    function plusSlides(n, no) {
+        showSlides(slideIndexes[no - 1] += n, no);
     }
 
-    function plusSlides(n) {
-        showSlides(slideIndex += n);
-    }
-
-    function currentSlide(n) {
-        showSlides(slideIndex = n);
-    }
-
-    // Slider for product images
-    function showProductSlides(n) {
+    function showSlides(n, no) {
         let i;
-        let slides = document.getElementsByClassName("product-slide");
-        let dots = document.getElementsByClassName("product-dot");
-        if (slides.length > 0) {
-            if (n > slides.length) { productSlideIndex = 1 }
-            if (n < 1) { productSlideIndex = slides.length }
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            slides[productSlideIndex - 1].style.display = "block";
-            if (dots[productSlideIndex - 1]) {
-                dots[productSlideIndex - 1].className += " active";
-            }
+        let slider = document.getElementById(sliders[no - 1]);
+        if (!slider) return;  // Return early if the slider element is not found
+        let slides = slider.getElementsByClassName("slide");
+        if (n > slides.length) { slideIndexes[no - 1] = 1 }
+        if (n < 1) { slideIndexes[no - 1] = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
         }
+        slides[slideIndexes[no - 1] - 1].style.display = "block";
     }
 
-    function plusProductSlides(n) {
-        showProductSlides(productSlideIndex += n);
-    }
+    sliders.forEach((sliderId, index) => {
+        showSlides(slideIndexes[index], index + 1);
+        setInterval(function() {
+            plusSlides(1, index + 1);
+        }, 4000);
+    });
 
-    function currentProductSlide(n) {
-        showProductSlides(productSlideIndex = n);
-    }
-
-    // Assign functions to global scope for HTML to access
     window.plusSlides = plusSlides;
-    window.currentSlide = currentSlide;
-    window.plusProductSlides = plusProductSlides;
-    window.currentProductSlide = currentProductSlide;
-
-    // Initialize slideshows
-    showSlides();
-    showProductSlides(productSlideIndex);
 });
