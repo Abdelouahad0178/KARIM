@@ -177,7 +177,7 @@ body {
 
 
 /* Menu hamburger (petites dimensions) */
-@media (max-width: 620px) {
+@media (max-width: 820px) {
     .toggle-menu {
         display: block;
         position: absolute;
@@ -258,6 +258,35 @@ body {
     align-items: center;
     transition: color 0.3s ease;
 }
+
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+
+.logo img {
+    height: 60px;
+    position: relative;
+    margin-top: 2%;
+    left: 12%;
+}
+
+
+
+.top-bar-links {
+    display: flex;
+    justify-content: center;
+    gap: 34px;
+    align-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
 }
 
 @media (max-width: 768px) {
