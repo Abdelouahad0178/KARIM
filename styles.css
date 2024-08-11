@@ -171,7 +171,28 @@ body {
 
 
 }
+@media (max-width: 920px) {
 
+
+    
+    .logo img {
+        height: 60px;
+        position: relative;
+        margin-top: 2%;
+        left: 52%;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: baseline;
+        align-content: center;
+        flex-wrap: wrap;
+    }
+
+}
 
 
 
@@ -314,6 +335,19 @@ body {
     align-items: center;
     transition: color 0.3s ease;
 }
+
+
+.top-bar-links {
+    display: flex;
+    justify-content: center;
+    gap: 27px;
+    align-content: center;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+
+
 }
 
 @media (max-width: 520px) {
