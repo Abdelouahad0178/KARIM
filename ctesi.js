@@ -3,37 +3,44 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelector('.nav-links');
     const dropdowns = document.querySelectorAll('.dropdown');
 
-    // Toggle the main menu
     if (toggleMenu && navLinks) {
         toggleMenu.addEventListener('click', function() {
             navLinks.classList.toggle('active');
+            document.body.classList.toggle('nav-active');
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
         });
     }
 
-    // Toggle submenus
     dropdowns.forEach(dropdown => {
-        const dropdownLink = dropdown.querySelector('a');
         const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        const dropdownLink = dropdown.querySelector('a');
 
         dropdownLink.addEventListener('click', function(e) {
-            if (window.innerWidth <= 1024) {
-                e.preventDefault(); // Prevent default navigation behavior
-                const isActive = dropdown.classList.contains('active');
+            e.preventDefault();
+            e.stopPropagation();
 
-                // Close all dropdowns
-                dropdowns.forEach(d => {
-                    d.classList.remove('active');
-                    d.querySelector('.dropdown-menu').classList.remove('active');
-                });
-
-                // Toggle the clicked dropdown
-                if (!isActive) {
-                    dropdown.classList.add('active');
-                    dropdownMenu.classList.add('active');
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                if (menu !== dropdownMenu) {
+                    menu.style.display = 'none';
                 }
-            }
+            });
+
+            dropdownMenu.style.display = dropdownMenu.style.display === 'flex' ? 'none' : 'flex';
         });
     });
+
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown') && !e.target.closest('.toggle-menu') && window.innerWidth <= 620) {
+            navLinks.classList.remove('active');
+            document.body.classList.remove('nav-active');
+            document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                menu.style.display = 'none';
+            });
+        }
+    });
+
 
     // Close the menu when clicking outside
     document.addEventListener('click', function(e) {

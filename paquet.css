@@ -169,6 +169,8 @@ body {
 
     .logo img {
         height: 55px;
+        position: relative;
+        left: -2%;
     }
 
     .toggle-menu {
