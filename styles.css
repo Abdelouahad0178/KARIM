@@ -179,7 +179,7 @@ body {
         height: 60px;
         position: relative;
         margin-top: 2%;
-        left: 52%;
+        left: 38%;
     }
 
     .nav-links {
@@ -191,6 +191,15 @@ body {
         align-content: center;
         flex-wrap: wrap;
     }
+
+
+    .navbar {
+        background-color: var(--primary-color);
+        padding: 6px -23px;
+        position: relative;
+        z-index: 1000;
+    }
+
 
 }
 
