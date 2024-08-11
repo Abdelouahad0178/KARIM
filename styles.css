@@ -117,6 +117,28 @@ body {
     color: var(--light-text-color);
 }
 
+@media (max-width: 1024px) {
+
+
+
+    .logo img {
+        height: 60px;
+        position: relative;
+        margin-top: 2%;
+        left: 79%;
+    }
+
+
+
+
+
+
+}
+
+
+
+
+
 /* Menu hamburger (petites dimensions) */
 @media (max-width: 620px) {
     .toggle-menu {
