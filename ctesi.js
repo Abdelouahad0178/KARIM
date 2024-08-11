@@ -1,35 +1,34 @@
-document.addEventListener('DOMContentLoaded', function () {
-    // Slider logic
-    let currentSlideIndex = 0;
-    const slides = document.querySelectorAll('.hero-slider .slide');
-    const totalSlides = slides.length;
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleMenu = document.querySelector('.toggle-menu');
+    const navLinks = document.querySelector('.nav-links');
+    const dropdowns = document.querySelectorAll('.dropdown');
 
-    function showSlide(index) {
-        slides.forEach((slide, i) => {
-            slide.style.transform = `translateX(${100 * (i - index)}%)`;
+    if (toggleMenu && navLinks) {
+        toggleMenu.addEventListener('click', function() {
+            navLinks.classList.toggle('active');
         });
     }
 
-    function changeSlide(direction) {
-        currentSlideIndex = (currentSlideIndex + direction + totalSlides) % totalSlides;
-        showSlide(currentSlideIndex);
-    }
+    dropdowns.forEach(dropdown => {
+        const dropdownLink = dropdown.querySelector('a');
+        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
 
-    document.querySelector('.prev').addEventListener('click', function () {
-        changeSlide(-1);
+        dropdownLink.addEventListener('click', function(e) {
+            if (window.innerWidth <= 1024) {
+                e.preventDefault(); // Empêche la navigation par défaut pour le lien
+                dropdown.classList.toggle('active'); // Toggle la classe active sur le parent li
+                dropdownMenu.classList.toggle('active'); // Toggle la visibilité du sous-menu
+            }
+        });
     });
 
-    document.querySelector('.next').addEventListener('click', function () {
-        changeSlide(1);
-    });
-
-    showSlide(currentSlideIndex);
-
-    // Hamburger menu logic
-    const toggleMenu = document.querySelector('.toggle-menu');
-    const navLinks = document.querySelector('.nav-links');
-
-    toggleMenu.addEventListener('click', function () {
-        navLinks.classList.toggle('active');
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.dropdown') && !e.target.closest('.toggle-menu')) {
+            navLinks.classList.remove('active');
+            dropdowns.forEach(dropdown => {
+                dropdown.classList.remove('active');
+                dropdown.querySelector('.dropdown-menu').classList.remove('active'); // Fermer les sous-menus ouverts
+            });
+        }
     });
 });

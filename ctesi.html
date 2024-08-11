@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTESI Collection</title>
+    <title>CTESI Collection - Maison Carrelage</title>
     <link rel="stylesheet" href="ctesi.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -27,17 +27,36 @@
         <nav class="navbar">
             <div class="container">
                 <div class="logo">
-                    <img src="/images/MAISONLOGO.png" alt="Maison Carrelage">
-                </div>
-                <div class="search-and-cart">
-                    <input type="text" placeholder="Rechercher des produits...">
-                    <button class="search-btn"><i class="fas fa-search"></i></button>
-                    <a href="#" class="cart-btn"><i class="fas fa-shopping-cart"></i></a>
+                    <img src="/images/MAISONLOGO.png" alt="maison carrelage 1979">
                 </div>
                 <div class="toggle-menu"><i class="fas fa-bars"></i></div>
                 <ul class="nav-links">
                     <li><a href="index.html">Accueil</a></li>
-                    <li><a href="#">Nos Marques</a></li>
+                    <li class="dropdown">
+                        <a href="#">Nos Marques <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/ctesi.html">TESI</a></li>
+                            <li><a href="#">JACOB DELAFON</a></li>
+                            <li><a href="#">GEBERIT</a></li>
+                            <li><a href="#">VILLEROY AND BOCH</a></li>
+                            <li><a href="#">IDROSPANIA</a></li>
+                            <li><a href="#">EQUIPEMENT PMR</a></li>
+                            <li><a href="#">ACO</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Carrelage <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Cuisine</a></li>
+                            <li><a href="#">Salle de Bain</a></li>
+                            <li><a href="#">Salon</a></li>
+                            <li><a href="#">Chambre à Coucher</a></li>
+                            <li><a href="#">Extérieur</a></li>
+                            <li><a href="#">Espace Commercial</a></li>
+                            <li><a href="#">Piscine</a></li>
+                            <li><a href="#">Anti-Dérapant</a></li>
+                        </ul>
+                    </li>
                     <li><a href="parquet.html">Parquet</a></li>
                     <li><a href="#">Salle de Bains</a></li>
                     <li><a href="#">Cuisine</a></li>
@@ -65,8 +84,8 @@
                     <img src="/images/Photo de Ech Chaaba Abdelouahad (39).jpg" alt="Salle de bain 4">
                 </div>
             </div>
-            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
-            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+            <button class="next" onclick="plusSlides(1)">&#10095;</button>
         </section>
 
         <section class="collection-intro">
